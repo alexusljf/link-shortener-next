@@ -16,26 +16,6 @@ const useLinkShortenEffect = () => {
   });
   type FormValues = z.infer<typeof formSchema>;
 
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   setErrorState(null); // Reset error state before new request
-  //   try {
-  //     const response = await axios.post("/api/shorten", { longUrl });
-  //     console.log({ response });
-  //     setShortUrl(response.data.link);
-  //   } catch (error) {
-  //     console.log("in catch block");
-  //     if (axios.isAxiosError(error)) {
-  //       setErrorState(
-  //         error.response?.data?.error ||
-  //           "An error occurred while shortening the URL"
-  //       );
-  //     } else {
-  //       setErrorState("An unknown error occurred");
-  //     }
-  //   }
-  // };
-
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
       setErrorState(null); // Reset error state before new request

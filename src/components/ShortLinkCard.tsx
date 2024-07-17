@@ -7,7 +7,7 @@ interface ShortLinkCardProps {
 
 const ShortLinkCard: React.FC<ShortLinkCardProps> = ({ shortUrl }) => {
   return (
-    <Alert className="border-muted border-2 w-80  md:w-3/5">
+    <Alert className="border-muted border-2 w-80 md:w-3/5 xl:w-2/5">
       <Link className="h-4 w-4" />
       <AlertTitle>Your Link has been shortened!</AlertTitle>
       <AlertDescription>

@@ -1,8 +1,7 @@
 // src/hooks/useLinkListEffect.ts
 "use client";
 import { useEffect, useState } from "react";
-import Link, { LinkDocument } from "../models/Link";
-import connect from "../../db"; // Ensure this is your MongoDB connection setup
+import Link from "../models/Link";
 import axios from "axios";
 
 type Link = {
@@ -20,9 +19,10 @@ const useLinkListEffect = () => {
       try {
         const response = await axios.get("/api/list");
         if (response.status === 200) {
-          setLinks(response.data); // Use response.data to get the actual data
+          setLinks(response.data);
         } else {
           setError("Failed to fetch links");
+          console.log(error);
         }
       } catch (error) {
         setError("Error fetching links");

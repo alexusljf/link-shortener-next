@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import RequirementsDrawer from "./RequirementsDrawer";
+import ShortLinkCard from "./ShortLinkCard";
 
 const LinkShortenerForm = () => {
   const { shortUrl, onSubmit, formSchema } = useLinkShortenEffect();
@@ -28,42 +29,34 @@ const LinkShortenerForm = () => {
   });
   return (
     <>
-      <div className="border-solid border-black border-2 p-4 w-2/3">
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <FormField
-              control={form.control}
-              name="url"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Link Shortener</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Enter your URL here" {...field} />
-                  </FormControl>
-                  <FormDescription>
-                    Enter the URL to be shortened.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <div className="flex justify-between">
-              <Button type="submit">Submit</Button>
-              <RequirementsDrawer />
-            </div>
-          </form>
-        </Form>
-        {shortUrl && (
-          <div className="mt-8">
-            <p>
-              Shortened URL:{" "}
-              <a href={shortUrl} target="_blank" rel="noopener noreferrer">
-                {shortUrl}
-              </a>
-            </p>
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="space-y-8 border-muted border-2 p-4 w-80 md:w-3/5 xl:w-2/5"
+        >
+          <FormField
+            control={form.control}
+            name="url"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Link Shortener</FormLabel>
+                <FormControl>
+                  <Input placeholder="Enter your URL here" {...field} />
+                </FormControl>
+                <FormDescription>
+                  Enter the URL to be shortened.
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <div className="flex justify-between">
+            <Button type="submit">Submit</Button>
+            <RequirementsDrawer />
           </div>
-        )}
-      </div>
+        </form>
+      </Form>
+      {shortUrl && <ShortLinkCard shortUrl={shortUrl} />}
     </>
   );
 };

@@ -5,7 +5,7 @@ Making this to learn MongoDB, TailwindCSS, Shadcn/ui and Next.js
 
 ## Tools Used
 
-- Next.js
+- Next.js in TypeScript
 - MongoDB
 - TailwindCSS
 - Shadcn/ui

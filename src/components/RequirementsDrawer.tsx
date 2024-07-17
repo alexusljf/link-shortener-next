@@ -18,8 +18,8 @@ const RequirementsDrawer = () => {
         <Button type="button">Requirements</Button>
       </DrawerTrigger>
       <DrawerContent className="flex items-center justify-center">
-        <div className="flex flex-col justify-items-center text-center w-1/2">
-          <DrawerHeader>
+        <div className="flex flex-col justify-items-center md:w-1/2">
+          <DrawerHeader className="text-left">
             <DrawerTitle>Please ensure the following:</DrawerTitle>
             <DrawerDescription>
               {" "}
@@ -28,7 +28,7 @@ const RequirementsDrawer = () => {
               Check the address bars and punctuation
               <br />
               The URL is in the correct format <br />
-              The monthly limit to shortening links has not been met
+              The monthly shortening limit has not been met
             </DrawerDescription>
           </DrawerHeader>
           <DrawerFooter>

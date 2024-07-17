@@ -18,11 +18,10 @@ const useLinkShortenEffect = () => {
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
-      setErrorState(null); // Reset error state before new request
-      // const response = await axios.post("/api/shorten", { longUrl: data.url });
-      // console.log({ response });
-      // setShortUrl(response.data.link);
-      setShortUrl("www.test.com");
+      setErrorState(null);
+      const response = await axios.post("/api/shorten", { longUrl: data.url });
+      console.log({ response });
+      setShortUrl(response.data.link);
     } catch (error) {
       console.log("in catch block");
       if (axios.isAxiosError(error)) {

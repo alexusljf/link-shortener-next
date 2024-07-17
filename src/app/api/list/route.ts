@@ -1,4 +1,3 @@
-import axios, { AxiosError } from "axios";
 import { NextRequest, NextResponse } from "next/server";
 import connect from "../../../../db";
 import Link from "../../../models/Link";

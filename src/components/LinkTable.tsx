@@ -15,7 +15,7 @@ const LinkTable = () => {
   console.log(links);
 
   return (
-    <div className="space-y-8 border-muted border-2 py-4 md:p-4 md:w-3/7 ">
+    <div className="space-y-8 border-muted border-2 py-4 md:p-4 w-full md:w-auto ">
       <div className="overflow-auto h-[500px]">
         <Table className="w-full border-collapse">
           <TableHeader>

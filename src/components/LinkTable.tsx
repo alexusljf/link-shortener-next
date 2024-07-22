@@ -16,18 +16,19 @@ interface props {
 }
 
 const LinkTable: React.FC<props> = ({ domainName }) => {
-  const [refreshState, setRefreshState] = useState(0);
-  const { links, fetchLinks } = useLinkListEffect();
+  // const [refreshState, setRefreshState] = useState(0);
+  // const { links, fetchLinks } = useLinkListEffect();
+  const { links } = useLinkListEffect();
+  console.log("i am in linkTable");
+  // // Fetch links when refreshState changes
+  // useEffect(() => {
+  //   fetchLinks();
+  // }, [refreshState, fetchLinks]);
 
-  // Fetch links when refreshState changes
-  useEffect(() => {
-    fetchLinks();
-  }, [refreshState, fetchLinks]);
-
-  // Callback to update the table when a link is deleted
-  const handleLinkDeleted = useCallback(() => {
-    setRefreshState((prevKey) => prevKey + 1);
-  }, []);
+  // // Callback to update the table when a link is deleted
+  // const handleLinkDeleted = useCallback(() => {
+  //   setRefreshState((prevKey) => prevKey + 1);
+  // }, []);
 
   return (
     <div className="space-y-8 border-muted border-2 md:p-4 w-full md:w-auto md:py-4">
@@ -58,10 +59,11 @@ const LinkTable: React.FC<props> = ({ domainName }) => {
                   {new Date(link.dateCreated).toLocaleDateString()}
                 </TableCell>
                 <TableCell>
-                  <DeleteButton
+                  {/* <DeleteButton
                     id={link.shortUrl}
                     onDeleted={handleLinkDeleted}
-                  />
+                  /> */}
+                  <DeleteButton id={link.shortUrl} domainName={domainName} />
                 </TableCell>
               </TableRow>
             ))}

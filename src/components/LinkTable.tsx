@@ -1,4 +1,5 @@
 "use client";
+import React, { useState, useEffect } from "react";
 import useLinkListEffect from "@/effects/useLinkListEffect";
 import {
   Table,
@@ -15,7 +16,18 @@ interface props {
 }
 
 const LinkTable: React.FC<props> = ({ domainName }) => {
-  const { links } = useLinkListEffect();
+  const [refreshState, setRefreshState] = useState(0);
+  const { links, fetchLinks } = useLinkListEffect();
+
+  // Fetch links when refreshState changes
+  useEffect(() => {
+    fetchLinks();
+  }, [refreshState, fetchLinks]);
+
+  // Callback to update the table when a link is deleted
+  const handleLinkDeleted = () => {
+    setRefreshState((prevKey) => prevKey + 1);
+  };
 
   return (
     <div className="space-y-8 border-muted border-2 md:p-4 w-full md:w-auto md:py-4">
@@ -46,7 +58,10 @@ const LinkTable: React.FC<props> = ({ domainName }) => {
                   {new Date(link.dateCreated).toLocaleDateString()}
                 </TableCell>
                 <TableCell>
-                  <DeleteButton id={link.shortUrl} />
+                  <DeleteButton
+                    id={link.shortUrl}
+                    onDeleted={handleLinkDeleted}
+                  />
                 </TableCell>
               </TableRow>
             ))}

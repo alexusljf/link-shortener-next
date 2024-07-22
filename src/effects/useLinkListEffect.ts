@@ -1,39 +1,25 @@
-// src/hooks/useLinkListEffect.ts
-"use client";
-import { useEffect, useState } from "react";
-import Link from "../models/Link";
+import { useState, useCallback } from "react";
 import axios from "axios";
 
-type Link = {
+interface List {
   longUrl: string;
   shortUrl: string;
   dateCreated: string;
-};
+}
 
 const useLinkListEffect = () => {
-  const [links, setLinks] = useState<Link[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const [links, setLinks] = useState<List[]>([]);
 
-  const fetchLinks = async () => {
+  const fetchLinks = useCallback(async () => {
     try {
       const response = await axios.get("/api/list");
-      if (response.status === 200) {
-        setLinks(response.data);
-      } else {
-        setError("Failed to fetch links");
-        console.log(error);
-      }
+      setLinks(response.data);
     } catch (error) {
-      setError("Error fetching links");
-      console.error("Error:", error);
+      console.error("Error fetching links:", error);
     }
-  };
-
-  useEffect(() => {
-    fetchLinks();
   }, []);
 
-  return { fetchLinks, links };
+  return { links, fetchLinks };
 };
 
 export default useLinkListEffect;

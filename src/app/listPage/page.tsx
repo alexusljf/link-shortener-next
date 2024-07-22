@@ -10,7 +10,7 @@ const Home = () => {
       <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
         Previously Shortened Links
       </h1>
-      <LoginDialog />
+      {/* <LoginDialog /> */}
       {baseUrl && <LinkTable domainName={baseUrl} />}
     </div>
   );

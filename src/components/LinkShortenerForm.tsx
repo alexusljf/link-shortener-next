@@ -18,8 +18,13 @@ import { Input } from "@/components/ui/input";
 import RequirementsDrawer from "./RequirementsDrawer";
 import ShortLinkCard from "./ShortLinkCard";
 
-const LinkShortenerForm = () => {
-  const { shortUrl, onSubmit, formSchema } = useLinkShortenEffect();
+interface props {
+  domainName: string;
+}
+
+const LinkShortenerForm: React.FC<props> = ({ domainName }) => {
+  const { shortUrlState, onSubmit, formSchema } =
+    useLinkShortenEffect(domainName);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -56,7 +61,7 @@ const LinkShortenerForm = () => {
           </div>
         </form>
       </Form>
-      {shortUrl && <ShortLinkCard shortUrl={shortUrl} />}
+      {shortUrlState && <ShortLinkCard shortUrl={shortUrlState} />}
     </>
   );
 };

@@ -2,46 +2,32 @@ import axios, { AxiosError } from "axios";
 import { NextRequest, NextResponse } from "next/server";
 import connect from "../../../../db";
 import Link from "../../../models/Link";
+import { nanoid } from "nanoid";
 
 export async function POST(req: NextRequest) {
-  await connect(); // Connect to MongoDB
+  await connect();
   try {
     const { longUrl } = await req.json();
-    const accessToken = process.env.ACCESS_TOKEN;
 
     if (!longUrl) {
       return NextResponse.json({ error: "Missing longUrl" }, { status: 400 });
     }
 
-    const response = await axios.post(
-      "https://api-ssl.bitly.com/v4/shorten",
-      { long_url: longUrl },
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    // create a unique id of len 7
+    const shortenId = nanoid(7);
 
-    // Update MongoDB - Add new link to the array
     const newLinkPair = {
       longUrl,
-      shortUrl: response.data.link,
+      shortUrl: shortenId,
       dateCreated: Date(),
     };
-    const existingLinks = await Link.findOne();
-    if (existingLinks) {
-      // Update existing record
-      existingLinks.links.push(newLinkPair);
-      await existingLinks.save();
-    } else {
-      // Create new record
-      const newLinks = new Link({ links: [newLinkPair] });
-      await newLinks.save();
-    }
 
-    return NextResponse.json(response.data, { status: 200 });
+    // Create new record
+    const newLink = new Link(newLinkPair);
+    console.log({ newLink });
+    await newLink.save();
+
+    return NextResponse.json(newLinkPair, { status: 200 });
   } catch (error) {
     console.error("Error:", error);
 

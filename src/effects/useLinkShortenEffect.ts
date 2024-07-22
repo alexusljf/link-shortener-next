@@ -4,9 +4,9 @@ import axios from "axios";
 import { z } from "zod";
 import { SubmitHandler } from "react-hook-form";
 
-const useLinkShortenEffect = () => {
+const useLinkShortenEffect = (domainName: string) => {
   const [longUrl, setLongUrl] = useState("");
-  const [shortUrl, setShortUrl] = useState("");
+  const [shortUrlState, setShortUrl] = useState("");
   const [errorState, setErrorState] = useState<string | null>(null);
 
   const formSchema = z.object({
@@ -19,11 +19,14 @@ const useLinkShortenEffect = () => {
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
       setErrorState(null);
-      const response = await axios.post("/api/shorten", { longUrl: data.url });
+      const response = await axios.post("/api/shortenLink", {
+        longUrl: data.url,
+      });
       console.log({ response });
-      setShortUrl(response.data.link);
+      const shortId = response.data.shortUrl as string;
+      setShortUrl(`${domainName}/${shortId}`);
+      console.log({ shortUrlState });
     } catch (error) {
-      console.log("in catch block");
       if (axios.isAxiosError(error)) {
         setErrorState(
           error.response?.data?.error ||
@@ -38,7 +41,7 @@ const useLinkShortenEffect = () => {
     formSchema,
     longUrl,
     setLongUrl,
-    shortUrl,
+    shortUrlState,
     setShortUrl,
     errorState,
     setErrorState,

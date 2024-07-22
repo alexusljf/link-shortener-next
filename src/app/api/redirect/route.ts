@@ -4,8 +4,10 @@ import Link from "../../../models/Link";
 
 export async function GET(req: NextRequest) {
   await connect();
+  const id = req.nextUrl.searchParams.get("id");
+  console.log({ id });
   try {
-    const record = await Link.find(); // Fetch the first document
+    const record = await Link.findOne({ shortUrl: id });
     if (record) {
       return NextResponse.json(record, { status: 200 });
     } else {

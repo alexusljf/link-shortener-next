@@ -3,19 +3,21 @@ import useLinkListEffect from "@/effects/useLinkListEffect";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
 
-const LinkTable = () => {
+interface props {
+  domainName: string;
+}
+
+const LinkTable: React.FC<props> = ({ domainName }) => {
   const { links } = useLinkListEffect();
-  console.log(links);
 
   return (
-    <div className="space-y-8 border-muted border-2 py-4 md:p-4 w-full md:w-auto ">
+    <div className="space-y-8 border-muted border-2 md:p-4 w-full md:w-auto md:py-4">
       <div className="overflow-auto h-[500px]">
         <Table className="w-full border-collapse">
           <TableHeader>
@@ -31,11 +33,11 @@ const LinkTable = () => {
                 <TableCell>{link.longUrl}</TableCell>
                 <TableCell>
                   <a
-                    href={link.shortUrl}
+                    href={`${domainName}/${link.shortUrl}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {link.shortUrl}
+                    {`${domainName}/${link.shortUrl}`}
                   </a>
                 </TableCell>
                 <TableCell>

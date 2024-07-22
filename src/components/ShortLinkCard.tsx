@@ -13,7 +13,7 @@ const ShortLinkCard: React.FC<ShortLinkCardProps> = ({ shortUrl }) => {
       <AlertDescription>
         Shortened URL:
         <a href={shortUrl} target="_blank" rel="noopener noreferrer">
-          {shortUrl}
+          {" " + shortUrl}
         </a>
       </AlertDescription>
     </Alert>

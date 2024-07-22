@@ -5,7 +5,9 @@ import Link from "../../../models/Link";
 export async function GET(req: NextRequest) {
   await connect();
   try {
+    console.log("before finding the records");
     const record = await Link.find();
+    console.log({ record });
     if (record) {
       return NextResponse.json(record, {
         status: 200,
@@ -22,6 +24,7 @@ export async function GET(req: NextRequest) {
       );
     }
   } catch (error) {
+    console.error("Failed to fetch data", error);
     return NextResponse.json(
       { error: "Failed to fetch data" },
       { status: 500 }

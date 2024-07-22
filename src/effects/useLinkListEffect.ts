@@ -14,26 +14,26 @@ const useLinkListEffect = () => {
   const [links, setLinks] = useState<Link[]>([]);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const fetchLinks = async () => {
-      try {
-        const response = await axios.get("/api/list");
-        if (response.status === 200) {
-          setLinks(response.data);
-        } else {
-          setError("Failed to fetch links");
-          console.log(error);
-        }
-      } catch (error) {
-        setError("Error fetching links");
-        console.error("Error:", error);
+  const fetchLinks = async () => {
+    try {
+      const response = await axios.get("/api/list");
+      if (response.status === 200) {
+        setLinks(response.data);
+      } else {
+        setError("Failed to fetch links");
+        console.log(error);
       }
-    };
+    } catch (error) {
+      setError("Error fetching links");
+      console.error("Error:", error);
+    }
+  };
 
+  useEffect(() => {
     fetchLinks();
   }, []);
 
-  return { links };
+  return { fetchLinks, links };
 };
 
 export default useLinkListEffect;

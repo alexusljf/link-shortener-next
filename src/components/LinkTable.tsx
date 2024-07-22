@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import DeleteButton from "./ui/DeleteButton";
 
 interface props {
   domainName: string;
@@ -25,6 +26,7 @@ const LinkTable: React.FC<props> = ({ domainName }) => {
               <TableHead className="md:w-[200px]">Long URL</TableHead>
               <TableHead className="md:w-[200px]">Short URL</TableHead>
               <TableHead>Date Created</TableHead>
+              <TableHead></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -42,6 +44,9 @@ const LinkTable: React.FC<props> = ({ domainName }) => {
                 </TableCell>
                 <TableCell>
                   {new Date(link.dateCreated).toLocaleDateString()}
+                </TableCell>
+                <TableCell>
+                  <DeleteButton id={link.shortUrl} />
                 </TableCell>
               </TableRow>
             ))}

@@ -5,9 +5,14 @@ import Link from "../../../models/Link";
 export async function GET(req: NextRequest) {
   await connect();
   try {
-    const record = await Link.find(); // Fetch the first document
+    const record = await Link.find();
     if (record) {
-      return NextResponse.json(record, { status: 200 });
+      return NextResponse.json(record, {
+        status: 200,
+        headers: {
+          "Cache-Control": "no-store",
+        },
+      });
     } else {
       return NextResponse.json(
         { message: "No records found" },

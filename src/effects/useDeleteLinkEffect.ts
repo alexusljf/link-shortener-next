@@ -1,3 +1,4 @@
+"use client";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
@@ -13,7 +14,7 @@ const useDeleteLinkEffect = (id: string, domainName: string) => {
         if (response.status === 200) {
           // onDeleted();
           console.log("woohoo! link deleted");
-          router.push(baseUrl);
+          router.replace(baseUrl);
         } else {
           console.log("Unable to delete Link");
         }

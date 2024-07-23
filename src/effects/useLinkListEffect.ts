@@ -18,7 +18,8 @@ const useLinkListEffect = () => {
     setIsLoading(true); // Set loading to true before fetching
     try {
       console.log("ebnter try");
-      const response = await axios.get("/api/linkList");
+      const timestamp = Date.now(); // Generate a unique timestamp
+      const response = await axios.get(`/api/linkList?timestamp=${timestamp}`); // Append the timestamp to the URL
       console.log("1");
       console.log(response.data);
       setLinks(response.data);

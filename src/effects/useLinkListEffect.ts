@@ -14,18 +14,11 @@ const useLinkListEffect = () => {
   console.log("enter useLinkListEffect");
 
   const fetchLinks = useCallback(async () => {
-    console.log("enter fetchLinks");
-    setIsLoading(true);
+    setIsLoading(true); // Set loading to true before fetching
     try {
-      setLinks([]);
-      console.log("enter try");
-      const response = await axios.get(`/api/linkList?timestamp=${Date.now()}`);
-      console.log("1");
-      console.log(response.data);
-      setLinks(response.data); // Update the links state
-      console.log("2");
-      setError(null);
-      console.log("3");
+      const response = await axios.get(`/api/list?timestamp=${Date.now()}`);
+      setLinks(response.data);
+      setError(null); // Clear any previous errors
     } catch (error) {
       console.log("enter error");
       console.error("Error fetching links:", error);

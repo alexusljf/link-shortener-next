@@ -12,3 +12,6 @@ Making this to learn MongoDB, TailwindCSS, Shadcn/UI and Next.js
 - Bitly API
 
 ## To-Do
+
+- [ ] Show/Hide delete column based on logged in status
+- [ ] Fix Vercel Table bug where data is not being fetched

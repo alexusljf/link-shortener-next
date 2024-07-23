@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import connect from "../../../../db";
-import Link from "../../../models/Link";
+import connect from "../../../../../db";
+import Link from "../../../../models/Link";
 
 export const maxDuration = 60;
 export const fetchCache = "force-no-store";
 export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest) {
-  console.log("enter get req");
+  console.log("enter get req timestamp");
   await connect();
   try {
     console.log("enter try, before finding the records");

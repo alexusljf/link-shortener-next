@@ -15,7 +15,7 @@ const useLinkListEffect = () => {
   const fetchLinks = useCallback(async () => {
     setIsLoading(true); // Set loading to true before fetching
     try {
-      const response = await axios.get(`/api/list?timestamp=${Date.now()}`);
+      const response = await axios.get(`/api/list/${Date.now()}`);
       setLinks(response.data);
       setError(null); // Clear any previous errors
     } catch (error) {

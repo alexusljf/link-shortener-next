@@ -24,7 +24,6 @@ const useLinkShortenEffect = (domainName: string) => {
       console.log({ response });
       const shortId = response.data.shortUrl as string;
       setShortUrl(`${domainName}/${shortId}`);
-      console.log({ shortUrlState });
     } catch (error) {
       if (axios.isAxiosError(error)) {
         setErrorState(

@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import connect from "../../../../db";
 import Link from "../../../models/Link";
 
+export const maxDuration = 60;
+export const fetchCache = "force-no-store";
+
 export async function GET(req: NextRequest) {
   console.log("enter get req");
   await connect();
@@ -15,6 +18,7 @@ export async function GET(req: NextRequest) {
         status: 200,
         headers: {
           "Cache-Control": "no-store", // Ensure no caching
+          "x-vercel-cache": "REVALIDATE",
         },
       });
     } else {

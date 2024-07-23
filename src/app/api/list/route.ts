@@ -4,12 +4,14 @@ import Link from "../../../models/Link";
 
 export const maxDuration = 60;
 export async function GET(req: NextRequest) {
+  console.log("enter get req");
   await connect();
   try {
-    console.log("before finding the records");
+    console.log("enter try, before finding the records");
     const record = await Link.find();
     console.log({ record });
     if (record) {
+      console.log("enter if");
       return NextResponse.json(record, {
         status: 200,
         headers: {
@@ -17,6 +19,7 @@ export async function GET(req: NextRequest) {
         },
       });
     } else {
+      console.log("enter else");
       return NextResponse.json(
         { message: "No records found" },
         { status: 404 }

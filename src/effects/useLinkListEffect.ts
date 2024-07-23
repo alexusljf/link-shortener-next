@@ -19,15 +19,24 @@ const useLinkListEffect = () => {
     try {
       console.log("ebnter try");
       const response = await axios.get("/api/list");
+      console.log("1");
+      console.log(response.data);
       setLinks(response.data);
+      console.log("2");
       setError(null); // Clear any previous errors
+      console.log("3");
     } catch (error) {
+      console.log("enteer error");
       console.error("Error fetching links:", error);
       setError("Failed to fetch links");
     } finally {
       setIsLoading(false); // Set loading to false after fetching
     }
   }, []);
+
+  useEffect(() => {
+    console.log("Updated links:", links); // This will log the updated `links` after state change
+  }, [links]);
 
   useEffect(() => {
     const fetchData = async () => {

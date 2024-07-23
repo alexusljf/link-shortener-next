@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import connect from "../../../../db";
 import Link from "../../../models/Link";
 import { nanoid } from "nanoid";
+export const maxDuration = 60;
 
 export async function POST(req: NextRequest) {
   await connect();

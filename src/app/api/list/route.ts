@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import connect from "../../../../db";
 import Link from "../../../models/Link";
 
+export const maxDuration = 60;
 export async function GET(req: NextRequest) {
   await connect();
   try {

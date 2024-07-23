@@ -11,7 +11,7 @@ export async function GET() {
     console.log({ record });
     if (record) {
       const response = NextResponse.json(record, { status: 200 });
-      response.headers.set("Cache-Control", "no-store"); // Disable caching
+      // response.headers.set("Cache-Control", "no-store"); // Disable caching
       return response;
     } else {
       return NextResponse.json(

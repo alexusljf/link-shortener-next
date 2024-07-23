@@ -13,9 +13,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json(record, {
         status: 200,
         headers: {
-          "Cache-Control": "no-cache, no-store, must-revalidate",
-          Pragma: "no-cache",
-          Expires: "0",
+          "Cache-Control": "no-cache",
         },
       });
     } else {

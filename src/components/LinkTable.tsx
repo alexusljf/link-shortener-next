@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import useLinkListEffect from "@/effects/useLinkListEffect";
 import {

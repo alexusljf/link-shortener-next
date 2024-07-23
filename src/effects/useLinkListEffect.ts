@@ -11,6 +11,7 @@ const useLinkListEffect = () => {
   const [links, setLinks] = useState<List[]>([]);
   const [isLoading, setIsLoading] = useState(false); // Add a loading state
   const [error, setError] = useState<string | null>(null); // Add an error state
+  console.log("enter useLinkListEfefct");
 
   const fetchLinks = useCallback(async () => {
     setIsLoading(true); // Set loading to true before fetching

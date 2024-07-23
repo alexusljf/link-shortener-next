@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import connect from "../../../../db";
 import Link from "../../../models/Link";
 
 export async function GET() {
-  console.log("before finding the records");
+  console.log("before connecting");
   await connect();
   try {
     console.log("before finding the records");

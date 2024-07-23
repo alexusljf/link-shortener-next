@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useCallback } from "react";
 import axios from "axios";
 
 interface List {
@@ -11,21 +11,16 @@ interface List {
 const useLinkListEffect = () => {
   const [links, setLinks] = useState<List[]>([]);
 
-  useEffect(() => {
-    const fetchLinks = async () => {
-      try {
-        const response = await axios.get("/api/list");
-        console.log("API Response for /api/list:", response.data);
-        setLinks(response.data);
-      } catch (error) {
-        console.error("Error fetching links:", error);
-      }
-    };
-
-    fetchLinks();
+  const fetchLinks = useCallback(async () => {
+    try {
+      const response = await axios.get("/api/list");
+      setLinks(response.data);
+    } catch (error) {
+      console.error("Error fetching links:", error);
+    }
   }, []);
 
-  return { links };
+  return { links, fetchLinks };
 };
 
 export default useLinkListEffect;

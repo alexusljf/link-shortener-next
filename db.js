@@ -7,6 +7,7 @@ async function connect() {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
+    mongoose.set("bufferTimeoutMS", 60000);
     console.log("Connected to MongoDB");
   } catch (error) {
     console.error("MongoDB connection error:", error);

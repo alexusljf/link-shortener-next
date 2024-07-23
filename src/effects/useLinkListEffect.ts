@@ -18,7 +18,7 @@ const useLinkListEffect = () => {
     setIsLoading(true); // Set loading to true before fetching
     try {
       console.log("ebnter try");
-      const response = await axios.get("/api/list");
+      const response = await axios.get("/api/linkList");
       console.log("1");
       console.log(response.data);
       setLinks(response.data);

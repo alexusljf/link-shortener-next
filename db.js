@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
-const uri =
-  "mongodb+srv://vercel-admin-user-669f498d2a70ff4d0fb2f2e1:BzGzdJ83nji3TKOT@cluster0.lbswdki.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const uri = process.env.MONGODB_URI;
+console.log(uri);
 
 async function connect() {
+  console.log(uri);
   try {
     await mongoose.connect(uri, {
       useNewUrlParser: true,

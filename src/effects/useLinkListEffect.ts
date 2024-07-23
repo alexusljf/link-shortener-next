@@ -14,8 +14,10 @@ const useLinkListEffect = () => {
   console.log("enter useLinkListEfefct");
 
   const fetchLinks = useCallback(async () => {
+    console.log("enter fetchLinks");
     setIsLoading(true); // Set loading to true before fetching
     try {
+      console.log("ebnter try");
       const response = await axios.get("/api/list");
       setLinks(response.data);
       setError(null); // Clear any previous errors
@@ -29,7 +31,9 @@ const useLinkListEffect = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log("enter useEffect");
       await fetchLinks(); // Await fetchLinks to ensure it completes
+      console.log("finish useEffect");
     };
 
     fetchData();

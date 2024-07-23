@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
       return NextResponse.json(record, {
         status: 200,
         headers: {
-          "Cache-Control": "no-cache",
+          "Cache-Control": "no-store",
         },
       });
     } else {

@@ -28,7 +28,11 @@ const useLinkListEffect = () => {
   }, []);
 
   useEffect(() => {
-    fetchLinks(); // Fetch links when the component mounts or fetchLinks changes
+    const fetchData = async () => {
+      await fetchLinks(); // Await fetchLinks to ensure it completes
+    };
+
+    fetchData();
   }, []);
 
   return { links, fetchLinks, isLoading, error }; // Return loading and error states

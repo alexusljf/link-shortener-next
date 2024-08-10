@@ -6,17 +6,10 @@ export const maxDuration = 60;
 export async function GET(req: NextRequest) {
   await connect();
   try {
-    console.log("before finding the records");
     const record = await Link.find();
-    console.log({ record });
     if (record) {
       return NextResponse.json(record, {
         status: 200,
-        // headers: {
-        //   "Cache-Control": "no-cache, no-store, must-revalidate",
-        //   Pragma: "no-cache",
-        //   Expires: "0",
-        // },
       });
     } else {
       return NextResponse.json(

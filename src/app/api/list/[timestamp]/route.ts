@@ -7,14 +7,10 @@ export const fetchCache = "force-no-store";
 export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest) {
-  console.log("enter get req timestamp");
   await connect();
   try {
-    console.log("enter try, before finding the records");
     const record = await Link.find();
-    console.log({ record });
     if (record) {
-      console.log("enter if");
       return NextResponse.json(record, {
         status: 200,
         headers: {
@@ -23,7 +19,6 @@ export async function GET(req: NextRequest) {
         },
       });
     } else {
-      console.log("enter else");
       return NextResponse.json(
         { message: "No records found" },
         { status: 404 }

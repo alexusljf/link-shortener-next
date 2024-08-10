@@ -21,7 +21,6 @@ const useLinkShortenEffect = (domainName: string) => {
       const response = await axios.post("/api/shortenLink", {
         longUrl: data.url,
       });
-      console.log({ response });
       const shortId = response.data.shortUrl as string;
       setShortUrl(`${domainName}/${shortId}`);
     } catch (error) {

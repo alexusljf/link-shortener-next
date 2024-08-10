@@ -9,20 +9,20 @@ interface List {
 
 const useLinkListEffect = () => {
   const [links, setLinks] = useState<List[]>([]);
-  const [isLoading, setIsLoading] = useState(false); // Add a loading state
-  const [error, setError] = useState<string | null>(null); // Add an error state
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const fetchLinks = useCallback(async () => {
-    setIsLoading(true); // Set loading to true before fetching
+    setIsLoading(true);
     try {
       const response = await axios.get(`/api/list/${Date.now()}`);
       setLinks(response.data);
-      setError(null); // Clear any previous errors
+      setError(null);
     } catch (error) {
       console.error("Error fetching links:", error);
       setError("Failed to fetch links");
     } finally {
-      setIsLoading(false); // Set loading to false after fetching
+      setIsLoading(false);
     }
   }, []);
 
@@ -30,7 +30,7 @@ const useLinkListEffect = () => {
     fetchLinks(); // Fetch links when the component mounts or fetchLinks changes
   }, [fetchLinks]);
 
-  return { links, fetchLinks, isLoading, error }; // Return loading and error states
+  return { links, fetchLinks, isLoading, error };
 };
 
 export default useLinkListEffect;

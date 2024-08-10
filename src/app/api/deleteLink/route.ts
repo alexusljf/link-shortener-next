@@ -6,7 +6,6 @@ export const maxDuration = 60;
 export async function DELETE(req: NextRequest) {
   await connect();
   const id = req.nextUrl.searchParams.get("id");
-  console.log({ id });
   try {
     const record = await Link.deleteOne({ shortUrl: id });
     if (record) {

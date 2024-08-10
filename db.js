@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 const uri = process.env.MONGODB_URI;
 
 async function connect() {
-  console.log(uri);
   try {
     await mongoose.connect(uri, {
       useNewUrlParser: true,

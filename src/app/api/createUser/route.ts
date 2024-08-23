@@ -1,34 +1,32 @@
 import axios, { AxiosError } from "axios";
 import { NextRequest, NextResponse } from "next/server";
 import connect from "../../../../db";
-import Link from "../../../models/Link";
-import { nanoid } from "nanoid";
+import User from "../../../models/User";
 
 export async function POST(req: NextRequest) {
   await connect();
   try {
-    const { longUrl, userName } = await req.json();
-
-    if (!longUrl) {
-      return NextResponse.json({ error: "Missing longUrl" }, { status: 400 });
-    }
-
-    // create a unique id of len 7
-    const shortenId = nanoid(7);
-
-    const newLinkPair = {
-      longUrl,
-      shortUrl: shortenId,
-      dateCreated: Date(),
+    const { name, userName, password } = await req.json();
+    const newUserObj = {
+      name,
       userName,
+      password,
     };
 
-    // Create new record
-    const newLink = new Link(newLinkPair);
-    console.log({ newLink });
-    await newLink.save();
+    const user = await User.findOne({ userName: userName });
+    if (user) {
+      return NextResponse.json(
+        { message: "Username already taken" },
+        { status: 400 }
+      );
+    }
+    const newUser = new User(newUserObj);
+    await newUser.save();
 
-    return NextResponse.json(newLinkPair, { status: 200 });
+    return NextResponse.json(
+      { message: "User Created Successfully", newUserObj },
+      { status: 200 }
+    );
   } catch (error) {
     console.error("Error:", error);
 

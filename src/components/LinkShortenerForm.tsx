@@ -17,14 +17,18 @@ import {
 import { Input } from "@/components/ui/input";
 import RequirementsDrawer from "./RequirementsDrawer";
 import ShortLinkCard from "./ShortLinkCard";
+import useUserEffect from "@/effects/useUserEffect";
 
 interface props {
   domainName: string;
 }
 
 const LinkShortenerForm: React.FC<props> = ({ domainName }) => {
-  const { shortUrlState, onSubmit, formSchema } =
-    useLinkShortenEffect(domainName);
+  const { currentUser } = useUserEffect();
+  const { shortUrlState, onSubmit, formSchema } = useLinkShortenEffect(
+    domainName,
+    currentUser?.userName
+  );
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -34,6 +38,12 @@ const LinkShortenerForm: React.FC<props> = ({ domainName }) => {
   });
   return (
     <>
+      {currentUser && (
+        <h2 className="scroll-m-20 border-b pb-2 text-center text-3xl font-semibold tracking-tight first:mt-0">
+          Welcome Back <br />
+          {currentUser.name}!
+        </h2>
+      )}
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}

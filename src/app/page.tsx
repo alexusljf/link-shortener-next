@@ -1,5 +1,6 @@
 import { headers } from "next/headers";
 import LinkShortenerForm from "../components/LinkShortenerForm";
+import { LoginDialog } from "@/components/LoginDialog";
 
 const Home = () => {
   const domainName = headers().get("host");

@@ -9,3 +9,9 @@ export interface LoginDialogProps {
   setPassword: Dispatch<SetStateAction<string>>;
   handleLogin: () => void;
 }
+
+export interface User {
+  name: string;
+  userName: string;
+  password: string;
+}

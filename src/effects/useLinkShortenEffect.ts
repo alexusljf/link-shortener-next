@@ -3,7 +3,7 @@ import axios from "axios";
 import { z } from "zod";
 import { SubmitHandler } from "react-hook-form";
 
-const useLinkShortenEffect = (domainName: string) => {
+const useLinkShortenEffect = (domainName: string, userName?: string) => {
   const [longUrl, setLongUrl] = useState("");
   const [shortUrlState, setShortUrl] = useState("");
   const [errorState, setErrorState] = useState<string | null>(null);
@@ -20,6 +20,7 @@ const useLinkShortenEffect = (domainName: string) => {
       setErrorState(null);
       const response = await axios.post("/api/shortenLink", {
         longUrl: data.url,
+        userName: userName,
       });
       const shortId = response.data.shortUrl as string;
       setShortUrl(`${domainName}/${shortId}`);

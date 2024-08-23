@@ -28,7 +28,6 @@ const RequirementsDrawer = () => {
               Check the address bars and punctuation
               <br />
               The URL is in the correct format <br />
-              The monthly shortening limit has not been met
             </DrawerDescription>
           </DrawerHeader>
           <DrawerFooter>

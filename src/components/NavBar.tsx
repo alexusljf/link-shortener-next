@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { ModeToggle } from "./ui/toggle-mode";
 import GithubButton from "./ui/GithubButton";
+import { LoginDialog } from "./LoginDialog";
 
 const Navbar = () => {
   return (
@@ -30,11 +31,14 @@ const Navbar = () => {
                   Shortened Links
                 </NavigationMenuLink>
               </Link>
+            </NavigationMenuItem>{" "}
+            <NavigationMenuItem>
+              <LoginDialog />
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
       </div>
-      <div className="flex flex-col md:flex-row justify-end items-center fixed top-0 right-0 z-50 pt-2 gap-1 pr-4">
+      <div className="flex flex-col md:flex-row justify-end items-center fixed top-0 left-0 md:left-auto md:right-0 z-50 pt-2 gap-1 pr-4">
         <ModeToggle />
         <GithubButton />
       </div>

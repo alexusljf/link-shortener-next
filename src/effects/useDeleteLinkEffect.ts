@@ -1,16 +1,14 @@
 import axios from "axios";
-import { useRouter } from "next/navigation";
 
-const useDeleteLinkEffect = (id: string, domainName: string) => {
-  const router = useRouter();
-  const baseUrl = `${domainName}/listPage`;
+const useDeleteLinkEffect = (id: string) => {
   const handleDelete = async () => {
     if (id) {
       try {
         const response = await axios.delete(`/api/deleteLink?id=${id}`);
         if (response.status === 200) {
           console.log("woohoo! link deleted");
-          router.push(baseUrl);
+
+          window.location.reload();
         } else {
           console.log("Unable to delete Link");
         }

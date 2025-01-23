@@ -8,7 +8,7 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { ModeToggle } from "./ui/toggle-mode";
+import { ModeToggle } from "./toggle-mode";
 import GithubButton from "./ui/GithubButton";
 import { LoginDialog } from "./LoginDialog";
 

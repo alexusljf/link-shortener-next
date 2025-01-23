@@ -11,7 +11,12 @@ const useUserEffect = () => {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [creationErrorMessage, setCreationErrorMessage] = useState<
+    string | null
+  >(null);
+  const [loginErrorMessage, setLoginErrorMessage] = useState<string | null>(
+    null
+  );
 
   useEffect(() => {
     const storedUser = localStorage.getItem("currentUser");
@@ -22,12 +27,15 @@ const useUserEffect = () => {
 
   const openLogin = () => {
     setCreationOpen(false);
-    setErrorMessage(null);
+    setCreationErrorMessage(null); // Reset creation error
+    setLoginErrorMessage(null); // Reset login error
     setLoginOpen(true);
   };
+
   const openUserCreation = () => {
     setLoginOpen(false);
-    setErrorMessage(null);
+    setLoginErrorMessage(null); // Reset login error
+    setCreationErrorMessage(null); // Reset creation error
     setCreationOpen(true);
   };
 
@@ -45,9 +53,9 @@ const useUserEffect = () => {
       window.location.reload();
     } catch (error: any) {
       if (error.response) {
-        setErrorMessage(error.response.data.message);
+        setLoginErrorMessage(error.response.data.message);
       } else {
-        setErrorMessage("An unexpected error occurred.");
+        setLoginErrorMessage("An unexpected error occurred.");
       }
     }
   };
@@ -66,12 +74,14 @@ const useUserEffect = () => {
       const createdUser = response.data.newUserObj;
       console.log(createdUser);
       setCurrentUser(createdUser);
+      localStorage.setItem("currentUser", JSON.stringify(createdUser));
       setCreationOpen(false);
+      window.location.reload();
     } catch (error: any) {
       if (error.response) {
-        setErrorMessage(error.response.data.message);
+        setCreationErrorMessage(error.response.data.message);
       } else {
-        setErrorMessage("An unexpected error occurred.");
+        setCreationErrorMessage("An unexpected error occurred.");
       }
     }
   };
@@ -86,7 +96,8 @@ const useUserEffect = () => {
   };
 
   const closeModal = () => {
-    setErrorMessage("");
+    setCreationErrorMessage(null);
+    setLoginErrorMessage(null);
   };
 
   return {
@@ -108,7 +119,8 @@ const useUserEffect = () => {
     setPassword,
     logout,
     createUser,
-    errorMessage,
+    creationErrorMessage,
+    loginErrorMessage,
     closeModal,
   };
 };
